@@ -7,8 +7,7 @@
 #include "src/graphics/buffers/vertexArray.h"
 #include "src/graphics/renderer2d.h"
 #include "src/graphics/simple2drenderer.h"
-<<<<<<< HEAD
-=======
+
 #include "src/graphics/static_sprite.h"
 #include "src/graphics/sprite.h"
 
@@ -18,7 +17,6 @@
 
 #define BATCH_RENDERER 1
 
->>>>>>> adding bach renderer
 
 int main()
 {
@@ -31,20 +29,6 @@ int main()
 	shader.enable();
 	glm::mat4 ortho = glm::ortho(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f);
 	shader.setUniformMat4("projection", ortho);
-<<<<<<< HEAD
-
-	// make the sprite
-	Rendrable2D sprite(glm::vec3(5, 5, 0), glm::vec2(4, 4), glm::vec4(1, 0, 1, 1), shader);
-	Rendrable2D sprite2(glm::vec3(7, 1, 0), glm::vec2(2, 3), glm::vec4(0.2f, 0, 1, 1), shader);
-	Simple2DRenderer renderer;
-
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
-	while (!window.closed())
-	{
-		window.processInput();
-
-=======
 	
 	srand(time(NULL));
 
@@ -85,19 +69,12 @@ int main()
 	while (!window.closed())
 	{
 		window.processInput();
->>>>>>> adding bach renderer
 		float x, y = 0;
 		window.getMoisePos(x, y);
 		shader.setUniform2f("light_pos", glm::vec2( (float)( x * 16.0f / 800.0f) ,(float) (9.0f - y * 9.0f / 600.0f)));
 
 		window.clear();
-<<<<<<< HEAD
 
-		renderer.submit(&sprite);
-		renderer.submit(&sprite2);
-		renderer.flush();
-		window.update();
-=======
 #if BATCH_RENDERER
 		renderer.begin();
 #endif
@@ -119,7 +96,6 @@ int main()
 			frames = 0;
 		}
 
->>>>>>> adding bach renderer
 	}
 
 

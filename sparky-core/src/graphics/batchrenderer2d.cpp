@@ -19,17 +19,11 @@ namespace sparky {	namespace graphics {
 		glGenVertexArrays(1, &m_VAO);
 		glGenBuffers(1, &m_VBO);
 		glBindVertexArray(m_VAO);
-<<<<<<< HEAD
 
-		glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE,NULL,GL_DYNAMIC_DRAW);
-		glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*) 0);
-		glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE,(const void*) (3 * sizeof(GLfloat)) );
-=======
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 		glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE,NULL,GL_DYNAMIC_DRAW);
 		glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::vertex)));
 		glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE,(const void*) (offsetof(VertexData, VertexData::color)) );
->>>>>>> adding bach renderer
 		glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
 		glEnableVertexAttribArray(SHADER_COLOR_INDEX);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -55,16 +49,7 @@ namespace sparky {	namespace graphics {
 		glBindVertexArray(0);
 	}
 
-<<<<<<< HEAD
-	void BatchRenderer2D::submit(const Rendrable2D* renderable)
-	{
 
-	}
-
-	void BatchRenderer2D::flush()
-	{
-
-=======
 	void BatchRenderer2D::begin()
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
@@ -124,7 +109,6 @@ namespace sparky {	namespace graphics {
 		glBindVertexArray(0);
 
 		m_IndexCount = 0;
->>>>>>> adding bach renderer
 	}
 
 }}
