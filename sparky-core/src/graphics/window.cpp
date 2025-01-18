@@ -65,7 +65,11 @@ namespace sparky {  namespace graphics {
 
 		/* Make the window's context current */
 		glfwMakeContextCurrent(m_Window);
+<<<<<<< HEAD
 
+=======
+		glfwSwapInterval(0.0);
+>>>>>>> adding bach renderer
 
 		// Initialiser GLAD
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {

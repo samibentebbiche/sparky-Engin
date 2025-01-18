@@ -19,10 +19,17 @@ namespace sparky {	namespace graphics {
 		glGenVertexArrays(1, &m_VAO);
 		glGenBuffers(1, &m_VBO);
 		glBindVertexArray(m_VAO);
+<<<<<<< HEAD
 
 		glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE,NULL,GL_DYNAMIC_DRAW);
 		glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*) 0);
 		glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE,(const void*) (3 * sizeof(GLfloat)) );
+=======
+		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+		glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE,NULL,GL_DYNAMIC_DRAW);
+		glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const void*)(offsetof(VertexData, VertexData::vertex)));
+		glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE,(const void*) (offsetof(VertexData, VertexData::color)) );
+>>>>>>> adding bach renderer
 		glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
 		glEnableVertexAttribArray(SHADER_COLOR_INDEX);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -48,6 +55,7 @@ namespace sparky {	namespace graphics {
 		glBindVertexArray(0);
 	}
 
+<<<<<<< HEAD
 	void BatchRenderer2D::submit(const Rendrable2D* renderable)
 	{
 
@@ -56,6 +64,67 @@ namespace sparky {	namespace graphics {
 	void BatchRenderer2D::flush()
 	{
 
+=======
+	void BatchRenderer2D::begin()
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+
+		m_Buffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+	}
+	void BatchRenderer2D::submit(const Rendrable2D* renderable)
+	{
+
+
+		const glm::vec3& position = renderable->getPosition();	
+
+		const glm::vec2& size = renderable->getSize();
+		const glm::vec4& color = renderable->getColor();
+		
+
+		int r = color.x * 255.0;
+		int g = color.y * 255.0;
+		int b = color.z * 255.0;
+		int w = color.w * 255.0;
+
+		unsigned int c = r << 24 | b << 16 | g << 8 | r;
+
+		m_Buffer->vertex = position;
+		m_Buffer->color = c;
+		m_Buffer++;
+
+		m_Buffer->vertex = glm::vec3(position.x, position.y + size.y, position.z);
+		m_Buffer->color = c;
+		m_Buffer++;
+
+		m_Buffer->vertex = glm::vec3(position.x + size.x, position.y + size.y, position.z);
+		m_Buffer->color = c;
+		m_Buffer++;
+
+		m_Buffer->vertex = glm::vec3(position.x + size.x, position.y, position.z);
+		m_Buffer->color = c;
+		m_Buffer++;
+
+		m_IndexCount += 6;
+	}
+
+	void BatchRenderer2D::end()
+	{
+		glUnmapBuffer(GL_ARRAY_BUFFER);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	}
+	void BatchRenderer2D::flush()
+	{
+		glBindVertexArray(m_VAO);
+		m_IBO->bind();
+
+		glDrawElements(GL_TRIANGLES, m_IndexCount, GL_UNSIGNED_SHORT, NULL);
+
+		m_IBO->unbind();
+		glBindVertexArray(0);
+
+		m_IndexCount = 0;
+>>>>>>> adding bach renderer
 	}
 
 }}

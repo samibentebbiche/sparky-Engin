@@ -14,7 +14,10 @@ namespace sparky { namespace  graphics {
 		virtual void submit(const Rendrable2D* renderable) = 0;
 		virtual void flush() = 0;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> adding bach renderer
 	};
 
 

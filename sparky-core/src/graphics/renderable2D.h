@@ -11,7 +11,13 @@ namespace sparky { namespace graphics {
 	struct VertexData
 	{
 		glm::vec3 vertex;
+<<<<<<< HEAD
 		glm::vec4 color;
+=======
+		//glm::vec4 color;
+		unsigned int color;
+
+>>>>>>> adding bach renderer
 	};
 
 	class Rendrable2D
@@ -22,6 +28,7 @@ namespace sparky { namespace graphics {
 		glm::vec2 m_Size;
 		glm::vec4 m_Color;
 
+<<<<<<< HEAD
 		VertexArray* m_VertexArray;
 		IndexBuffer* m_IndexBuffer;
 		Shader& m_Shader;
@@ -65,6 +72,16 @@ namespace sparky { namespace graphics {
 
 		inline const VertexArray* getVAO() const { return m_VertexArray; }
 		inline const IndexBuffer* getIBO() const { return m_IndexBuffer; }
+=======
+
+	public:
+		Rendrable2D(glm::vec3 position, glm::vec2 size, glm::vec4 color)
+			: m_Position(position), m_Color(color), m_Size(size)
+		{ }
+
+		~Rendrable2D() 
+		{ }
+>>>>>>> adding bach renderer
 		
 		inline const glm::vec3& getPosition() const { return m_Position; }
 		inline const glm::vec2& getSize() const { return m_Size; }
