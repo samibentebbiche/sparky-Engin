@@ -2,11 +2,11 @@
 
 #include "glm/glm.hpp"
 #include <glad/glad.h>
+#include <vector>
 
-#include "renderable2D.h"
 
 namespace sparky { namespace  graphics {
-
+	class Rendrable2D;
 	class Renderer2D
 	{
 	protected:

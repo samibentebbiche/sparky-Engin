@@ -13,6 +13,8 @@
 
 #include "src/graphics/batchrenderer2d.h"
 #include "src/graphics/layers/tilelayer.h"
+#include "src/graphics/layers/group.h"
+
 #include "src/utils/time.h"
 #include <time.h>
 
